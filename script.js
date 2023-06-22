@@ -26,7 +26,8 @@ const wordLengths = {
         'mangily', 'moonily', 'muddily', 'milkily',
         'nastily', 'noisily', 'nervily', 'nuttily',
         'needily', 'pettily', 'pithily', 'privily',
-        'perkily'
+        'perkily', 'happily', 'happily', 'luckily',
+        'luckily'
     ],
     '8': [
         'bloodily', 'breezily', 'clammily', 'clumsily',
@@ -97,7 +98,7 @@ const words = [];
 
 for (let i = 0; i < 20; i++) {
     const randomAdverb = adverbs[Math.floor(Math.random() * adverbs.length)];
-    words.push(randomAdverb);
+    if (!words.includes(randomAdverb)) { words.push(randomAdverb); }
 }
 
 paragraphElement.textContent = words.join(".");
@@ -106,6 +107,17 @@ paragraphElement.textContent = words.join(".");
 let currentWordIndex = 0;
 let currentLetterIndex = 0;
 let replacementWord = "";
+
+function findNewWord(length, current) {
+    let tries = 10;
+    while (tries > 0) {
+        const randomWordIndex = Math.floor(Math.random() * wordLengths[length].length);
+        if (!words.includes(randomWordIndex)) {
+            return wordLengths[length][randomWordIndex];
+        }   
+    }
+    return current;
+}
 
 // Swap out a random letter every second except for the last three letters (ily)
 function updateParagraph() {
@@ -118,12 +130,8 @@ function updateParagraph() {
     if (currentLetterIndex < maxIndex) {
         if (currentLetterIndex === 0) {
             // Select a random word from wordLengths of the same length as the current word
-            const randomWordIndex = Math.floor(Math.random() * wordLengths[length].length);
-            replacementWord = wordLengths[length][randomWordIndex];
+            replacementWord = findNewWord(length, word);
         }
-
-        // Get the current letter at the selected index
-        const currentLetter = word[currentLetterIndex];
 
         // Get the corresponding replacement letter from the replacement word
         const replacementLetter = replacementWord[currentLetterIndex];
