@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "light";
+  src: url("fonts/gabriele.light-ribbon-fg-regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "bad";
+  src: url("fonts/gabriele.bad-ah.ttf") format("truetype");
+}
+
+
+body,
+html {
+  width: 50%;
+  margin: 40px 40px;
+  min-width: 300px;
+  font-family: "light", monospace;
+  font-size: 1.2em;
+}
+
+.bold-type {
+    font-family: "bad";
+}
